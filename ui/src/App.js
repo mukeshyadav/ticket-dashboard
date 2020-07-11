@@ -1,29 +1,25 @@
 import React from "react";
 
+import SignInForm from "./pages/signin/";
+import CreateTicket from "./pages/createticket/";
+
 function App() {
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
-      <div className="px-6 py-4">
-        <div className="font-bold text-purple-500 text-xl mb-2">
-          Mukesh Yadav
+    <>
+      <div className="flex bg-white border-b border-gray-200 fixed top-0 inset-x-0 z-100 h-16 items-center">
+        <div className="w-full max-w-screen-xl relative mx-auto px-6">
+          <div className="lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8">
+            Ticket Dashboard
+          </div>
         </div>
-        <p className="text-gray-700 text-base">
-          When i’m not coding i switch to netflix with biscuits and cold tea as
-          my companion. <span></span>😜
-        </p>
       </div>
-      <div className="px-6 py-4">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-          #Software Engineer
-        </span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
-          #Writter
-        </span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mt-2 ml-20">
-          #Public Speaker
-        </span>
+      <div className="w-full max-w-screen-xl relative mx-auto px-6">
+        <div className="pt-20 pl-6">
+          <SignInForm />
+          <CreateTicket />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
