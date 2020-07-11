@@ -2,6 +2,7 @@ import React from "react";
 
 import SignInForm from "./pages/signin/";
 import CreateTicket from "./pages/createticket/";
+import ListTickets from "./pages/listtitcket";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <div className="pt-20 pl-6">
           <SignInForm />
           <CreateTicket />
+          <ListTickets />
         </div>
       </div>
     </>
