@@ -1,8 +1,8 @@
 import React from "react";
 
 import SignInForm from "./pages/signin/";
-import CreateTicket from "./pages/createticket/";
-import ListTickets from "./pages/listtitcket";
+// import CreateTicket from "./pages/createticket/";
+// import ListTickets from "./pages/listtitcket";
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
       <div className="w-full max-w-screen-xl relative mx-auto px-6">
         <div className="pt-20 pl-6">
           <SignInForm />
-          <CreateTicket />
-          <ListTickets />
+          {/* <CreateTicket />
+          <ListTickets /> */}
         </div>
       </div>
     </>
