@@ -2,7 +2,7 @@ import React from "react";
 
 const ticketContext = React.createContext({
   tickets: [],
-  isLoggedIn: true,
+  isLoggedIn: false,
   isAdmin: false
 });
 

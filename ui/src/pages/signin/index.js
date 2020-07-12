@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import useFetch from "use-http";
+import TicketContext from "../../TicketContext";
 
 export default function SignInForm() {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = data => {
-    console.log(data);
+  const { register, watch, errors, handleSubmit } = useForm();
+  const watchUserType = watch("isAdmin");
+  const { state, dispatch } = useContext(TicketContext);
+  const { post, response, loading, error } = useFetch(
+    "http://localhost:3000/api/v1/"
+  );
+  const onSubmit = async data => {
+    const result = await post("/signin", data);
+    if (response.ok) {
+      dispatch({ type: "APP_SIGNIN", payload: response.data });
+    }
   };
 
   return (
@@ -23,12 +33,13 @@ export default function SignInForm() {
             Username
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.email &&
+              "border-red-500"}`}
             id="email"
             type="email"
             name="email"
             placeholder="enter email"
-            ref={register}
+            ref={register({ required: true, pattern: /^\S+@\S+$/i })}
           />
         </div>
 
@@ -40,19 +51,23 @@ export default function SignInForm() {
             Password
           </label>
           <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className={`shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.password &&
+              "border-red-500"}`}
             id="password"
             type="password"
             name="password"
             placeholder="enter password"
-            ref={register}
+            ref={register({ required: true })}
           />
-          <p className="text-red-500 text-xs italic">
-            Please choose a password.
-          </p>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="isAdmin"
+          >
+            Login as
+          </label>
           <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
             <input
               type="checkbox"
@@ -67,7 +82,7 @@ export default function SignInForm() {
             ></label>
           </div>
           <label htmlFor="isAdmin" className="text-xs text-gray-700">
-            Normal/Admin User
+            {`${watchUserType ? "Admin" : "Normal"} User`}
           </label>
         </div>
 
