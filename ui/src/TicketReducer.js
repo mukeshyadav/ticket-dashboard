@@ -27,7 +27,6 @@ export default function ticketReducer(state, action) {
     case "HIDE_LOADER":
       return { ...state, isLoading: action.payload };
     case "STORE_DATA":
-      console.log(action);
       return { ...state, ...action.payload };
     default:
       return state;

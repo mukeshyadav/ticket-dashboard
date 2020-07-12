@@ -18,16 +18,18 @@ export default function AppRoute() {
   if (state.isLoggedIn && state.isAdmin) {
     history.push("/list");
   }
-  if (state.isLoggedIn && !state.isAdmin) {
-    history.push("/create");
-  }
 
   return (
     <>
       <Switch>
-        <Route exact path="/" component={SignIn} />
-        <Route exact path="/create" component={CreateTicket} />
-        <Route exact path="/list" component={ListTickets} />
+        {!state.isLoggedIn ? (
+          <Route exact path="/" component={SignIn} />
+        ) : (
+          <>
+            <Route exact path="/create" component={CreateTicket} />
+            <Route exact path="/list" component={ListTickets} />{" "}
+          </>
+        )}
         {!state.isLoggedIn && <Redirect to="/" />}
       </Switch>
       {state.isLoading && <Loader />}
