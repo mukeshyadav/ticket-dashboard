@@ -4,12 +4,14 @@ import TicketContext from "./TicketContext";
 import TicketReducer from "./TicketReducer";
 import AppRoute from "./Routes";
 
+import { LOCALSTORAGE_NAME } from "./AppConfig";
+
 export default function App() {
   const initialAppState = useContext(TicketContext);
   const [state, dispatch] = useReducer(TicketReducer, initialAppState);
 
   useEffect(() => {
-    const storageData = localStorage.getItem("ticket-dashboard");
+    const storageData = localStorage.getItem(LOCALSTORAGE_NAME);
     if (storageData) {
       dispatch({ type: "STORE_DATA", payload: JSON.parse(storageData) });
     }

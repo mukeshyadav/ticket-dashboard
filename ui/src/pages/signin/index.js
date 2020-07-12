@@ -4,14 +4,14 @@ import useFetch from "use-http";
 
 import Error from "../../components/Error";
 import TicketContext from "../../TicketContext";
+import { API_URL, ERROR_MESSAGE } from "../../AppConfig";
 
 export default function SignInForm() {
   const { register, watch, errors, handleSubmit } = useForm();
   const watchUserType = watch("isAdmin");
-  const { state, dispatch } = useContext(TicketContext);
-  const { post, response, loading, error } = useFetch(
-    "http://localhost:3000/api/v1/"
-  );
+  const { dispatch } = useContext(TicketContext);
+  const { post, response, loading, error } = useFetch(API_URL);
+
   const onSubmit = async data => {
     dispatch({ type: "SHOW_LOADER", payload: loading });
     const result = await post("/signin", data);
@@ -24,7 +24,7 @@ export default function SignInForm() {
   return (
     <div className="w-full max-w-xs mx-auto">
       <h2 className="text-xl font-semibold pb-2 pt-2">Login</h2>
-      {error && <Error message="Something went wrong. Try again!!!" />}
+      {error && <Error message={ERROR_MESSAGE.FAILED} />}
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit(onSubmit)}

@@ -1,11 +1,17 @@
+import { LOCALSTORAGE_NAME } from "./AppConfig";
 export default function ticketReducer(state, action) {
   switch (action.type) {
     case "APP_SIGNIN":
       const { role, token } = action.payload;
       let isAdmin = role === "Admin" ? true : false;
       localStorage.setItem(
-        "ticket-dashboard",
-        JSON.stringify({ ...state, isLoggedIn: true, isAdmin: isAdmin })
+        LOCALSTORAGE_NAME,
+        JSON.stringify({
+          ...state,
+          isLoggedIn: true,
+          isAdmin: isAdmin,
+          token: token
+        })
       );
       return {
         ...state,
