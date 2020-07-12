@@ -19,7 +19,7 @@ export default function CreateTicket() {
 
   const onSubmit = async data => {
     dispatch({ type: "SHOW_LOADER", payload: loading });
-    const result = await post("/stories", data);
+    await post("/stories", data);
     if (response.ok) {
       dispatch({ type: "HIDE_LOADER", payload: loading });
       history.push("/list");

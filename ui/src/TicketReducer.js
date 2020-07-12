@@ -21,7 +21,14 @@ export default function ticketReducer(state, action) {
     case "CREATE_TICKET":
       return state;
     case "LIST_TICKETS":
-      return state;
+      localStorage.setItem(
+        LOCALSTORAGE_NAME,
+        JSON.stringify({
+          ...state,
+          tickets: action.payload
+        })
+      );
+      return { ...state, tickets: action.payload };
     case "SHOW_LOADER":
       return { ...state, isLoading: action.payload };
     case "HIDE_LOADER":
