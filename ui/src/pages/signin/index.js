@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import useFetch from "use-http";
+
+import Error from "../../components/Error";
 import TicketContext from "../../TicketContext";
 
 export default function SignInForm() {
@@ -11,15 +13,18 @@ export default function SignInForm() {
     "http://localhost:3000/api/v1/"
   );
   const onSubmit = async data => {
+    dispatch({ type: "SHOW_LOADER", payload: loading });
     const result = await post("/signin", data);
     if (response.ok) {
-      dispatch({ type: "APP_SIGNIN", payload: response.data });
+      dispatch({ type: "APP_SIGNIN", payload: result });
+      dispatch({ type: "HIDE_LOADER", payload: loading });
     }
   };
 
   return (
     <div className="w-full max-w-xs mx-auto">
       <h2 className="text-xl font-semibold pb-2 pt-2">Login</h2>
+      {error && <Error message="Something went wrong. Try again!!!" />}
       <form
         className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         onSubmit={handleSubmit(onSubmit)}

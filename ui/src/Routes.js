@@ -6,10 +6,12 @@ import SignIn from "./pages/signin/";
 import CreateTicket from "./pages/createticket/";
 import ListTickets from "./pages/listtitcket";
 
+import Loader from "./components/Loader";
+
 export default function AppRoute() {
   const { state } = useContext(TicketContext);
   let history = useHistory();
-  console.log(state);
+
   if (!state.isLoggedIn) {
     history.push("/");
   }
@@ -21,11 +23,14 @@ export default function AppRoute() {
   }
 
   return (
-    <Switch>
-      <Route exact path="/" component={SignIn} />
-      <Route exact path="/create" component={CreateTicket} />
-      <Route exact path="/list" component={ListTickets} />
-      {!state.isLoggedIn && <Redirect to="/" />}
-    </Switch>
+    <>
+      <Switch>
+        <Route exact path="/" component={SignIn} />
+        <Route exact path="/create" component={CreateTicket} />
+        <Route exact path="/list" component={ListTickets} />
+        {!state.isLoggedIn && <Redirect to="/" />}
+      </Switch>
+      {state.isLoading && <Loader />}
+    </>
   );
 }

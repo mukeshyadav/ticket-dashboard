@@ -12,6 +12,10 @@ export default function ticketReducer(state, action) {
       return state;
     case "LIST_TICKETS":
       return state;
+    case "SHOW_LOADER":
+      return { ...state, isLoading: action.payload };
+    case "HIDE_LOADER":
+      return { ...state, isLoading: action.payload };
     default:
       return state;
   }
