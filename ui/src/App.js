@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useReducer, useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import TicketContext from "./TicketContext";
 import TicketReducer from "./TicketReducer";
@@ -7,6 +7,13 @@ import AppRoute from "./Routes";
 export default function App() {
   const initialAppState = useContext(TicketContext);
   const [state, dispatch] = useReducer(TicketReducer, initialAppState);
+
+  useEffect(() => {
+    const storageData = localStorage.getItem("ticket-dashboard");
+    if (storageData) {
+      dispatch({ type: "STORE_DATA", payload: JSON.parse(storageData) });
+    }
+  }, []);
   return (
     <Router>
       <TicketContext.Provider value={{ state, dispatch }}>
