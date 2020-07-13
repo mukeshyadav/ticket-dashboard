@@ -16,7 +16,9 @@ export default function ListTickets() {
   });
 
   useEffect(() => {
-    loadResults();
+    if (!state.tickets.length) {
+      loadResults();
+    }
   }, []);
 
   const loadResults = async () => {

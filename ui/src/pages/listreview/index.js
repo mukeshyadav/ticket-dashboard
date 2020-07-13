@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import useFetch from "use-http";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import { API_URL, ERROR_MESSAGE } from "../../AppConfig";
 import TableContext from "../../TicketContext";
@@ -13,6 +13,7 @@ export default function ListReview() {
     }
   });
   const [ticketInfo, setTicketIfo] = useState({});
+  const history = useHistory();
   let { id } = useParams();
 
   useEffect(() => {
@@ -29,7 +30,14 @@ export default function ListReview() {
   };
 
   const reviewStatus = status => {
-    console.log(status);
+    let records = state.tickets.map(tkt => {
+      if (tkt["id"] === parseInt(id)) {
+        tkt["status"] = status;
+      }
+      return tkt;
+    });
+    dispatch({ type: "LIST_TICKETS", payload: records });
+    history.push("/list");
   };
 
   const {
@@ -62,19 +70,19 @@ export default function ListReview() {
           <div className="w-1/6 h-12 font-semibold">Estimated Time</div>
           <div className="w-1/4 h-12">{estimatedHrs}</div>
           <div className="w-1/6 h-12 font-semibold">Cost</div>
-          <div className="w-1/4 h-12">{cost}</div>
+          <div className="w-1/4 h-12">{`$${cost}`}</div>
         </div>
       </div>
       <div className="px-6 py-4">
         <button
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          onClick={e => reviewStatus("accept")}
+          onClick={e => reviewStatus("accepted")}
         >
           Accept
         </button>
         <button
           className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
-          onClick={e => reviewStatus("reject")}
+          onClick={e => reviewStatus("rejected")}
         >
           Reject
         </button>

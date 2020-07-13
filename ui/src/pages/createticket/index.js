@@ -20,8 +20,12 @@ export default function CreateTicket() {
   const onSubmit = async data => {
     dispatch({ type: "SHOW_LOADER", payload: loading });
     data["status"] = "pending";
-    await post("/stories", data);
+    let result = await post("/stories", data);
     if (response.ok) {
+      dispatch({
+        type: "LIST_TICKETS",
+        payload: state.tickets.unshift(result)
+      });
       dispatch({ type: "HIDE_LOADER", payload: loading });
       history.push("/list");
     }
@@ -146,15 +150,20 @@ export default function CreateTicket() {
           >
             Cost associated
           </label>
-          <input
-            className={`shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.cost &&
-              "border-red-500"}`}
-            id="cost"
-            type="number"
-            name="cost"
-            placeholder="enter cost"
-            ref={register({ required: true, min: 1, max: 9999 })}
-          />
+          <div className="relative flex">
+            <span className="py-2 px-3 font-semibold bg-gray-300 rounded rounded-r-none">
+              $
+            </span>
+            <input
+              className={`shadow appearance-none border rounded rounded-l-none w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${errors.cost &&
+                "border-red-500"}`}
+              id="cost"
+              type="number"
+              name="cost"
+              placeholder="enter cost"
+              ref={register({ required: true, min: 1, max: 9999 })}
+            />
+          </div>
         </div>
 
         <div className="flex items-center justify-between">
