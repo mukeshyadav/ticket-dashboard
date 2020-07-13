@@ -5,7 +5,8 @@ export const LOCALSTORAGE_NAME = "ticket-dashboard";
 export const ERROR_MESSAGE = {
   FAILED: "Something went wrong. Try again!!!",
   NOTICKET:
-    'No ticket, <a href="/create" class="text-blue-700">click here</a> to create new'
+    'No ticket, <a href="/create" class="text-blue-700">click here</a> to create new',
+  NORESULT: "No records for this filter, try another!!!"
 };
 
 export const appRoutes = {
