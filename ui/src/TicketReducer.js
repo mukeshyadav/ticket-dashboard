@@ -48,6 +48,9 @@ export default function ticketReducer(state, action) {
       return { ...state, isLoading: action.payload };
     case "STORE_DATA":
       return { ...state, ...action.payload };
+    case "SIGN_OUT":
+      localStorage.clear();
+      return { ...state, isLoggedIn: false, isAdmin: false, isLoading: false };
     default:
       return state;
   }

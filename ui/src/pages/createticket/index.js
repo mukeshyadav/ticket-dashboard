@@ -19,6 +19,7 @@ export default function CreateTicket() {
 
   const onSubmit = async data => {
     dispatch({ type: "SHOW_LOADER", payload: loading });
+    data["status"] = "pending";
     await post("/stories", data);
     if (response.ok) {
       dispatch({ type: "HIDE_LOADER", payload: loading });
