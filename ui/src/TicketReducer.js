@@ -5,18 +5,21 @@ export default function ticketReducer(state, action) {
       const { role, token } = action.payload;
       let isAdmin = role === "Admin" ? true : false;
       localStorage.setItem(
-        LOCALSTORAGE_NAME,
+        `${LOCALSTORAGE_NAME}`,
         JSON.stringify({
           ...state,
           isLoggedIn: true,
           isAdmin: isAdmin,
+          role: role,
           token: token
         })
       );
       return {
         ...state,
         isLoggedIn: true,
-        isAdmin: isAdmin
+        isAdmin: isAdmin,
+        role: role,
+        token: token
       };
     case "CREATE_TICKET":
       return state;

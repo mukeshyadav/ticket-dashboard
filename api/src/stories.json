@@ -7,7 +7,8 @@
     "type": "enhancement",
     "complexity": "low",
     "estimatedHrs": 1,
-    "cost": 10
+    "cost": 10,
+    "status": "pending"
   },
   {
     "id": 2,
@@ -17,7 +18,8 @@
     "type": "enhancement",
     "complexity": "mid",
     "estimatedHrs": 1,
-    "cost": 20
+    "cost": 20,
+    "status": "rejected"
   },
   {
     "id": 3,
@@ -27,7 +29,8 @@
     "type": "enhancement",
     "complexity": "mid",
     "estimatedHrs": 1,
-    "cost": 25
+    "cost": 25,
+    "status": "accepted"
   },
   {
     "id": 4,
@@ -37,7 +40,8 @@
     "type": "enhancement",
     "complexity": "mid",
     "estimatedHrs": 1,
-    "cost": 65
+    "cost": 65,
+    "status": "pending"
   },
   {
     "id": 5,
@@ -47,7 +51,8 @@
     "type": "bugfix",
     "complexity": "high",
     "estimatedHrs": 1,
-    "cost": 90
+    "cost": 90,
+    "status": "pending"
   },
   {
     "id": 6,
@@ -57,7 +62,8 @@
     "type": "bugfix",
     "complexity": "high",
     "estimatedHrs": 1,
-    "cost": 35
+    "cost": 35,
+    "status": "accepted"
   },
   {
     "id": 7,
@@ -67,7 +73,8 @@
     "type": "bugfix",
     "complexity": "high",
     "estimatedHrs": 1,
-    "cost": 90
+    "cost": 90,
+    "status": "accepted"
   },
   {
     "id": 8,
@@ -77,6 +84,7 @@
     "type": "development",
     "complexity": "low",
     "estimatedHrs": 1,
-    "cost": 50
+    "cost": 50,
+    "status": "rejected"
   }
 ]

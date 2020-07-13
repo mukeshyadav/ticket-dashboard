@@ -5,8 +5,10 @@ import useFetch from "use-http";
 import Error from "../../components/Error";
 import TicketContext from "../../TicketContext";
 import { API_URL, ERROR_MESSAGE } from "../../AppConfig";
+import { useHistory } from "react-router-dom";
 
 export default function SignInForm() {
+  let history = useHistory();
   const { register, watch, errors, handleSubmit } = useForm();
   const watchUserType = watch("isAdmin");
   const { dispatch } = useContext(TicketContext);
@@ -17,6 +19,12 @@ export default function SignInForm() {
     const result = await post("/signin", data);
     if (response.ok) {
       dispatch({ type: "APP_SIGNIN", payload: result });
+      if (result.role === "Admin") {
+        history.push("/list");
+      }
+      if (result.role === "user") {
+        history.push("/create");
+      }
       dispatch({ type: "HIDE_LOADER", payload: loading });
     }
   };

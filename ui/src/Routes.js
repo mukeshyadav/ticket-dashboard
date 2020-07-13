@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import TicketContext from "./TicketContext";
-import { Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import SignIn from "./pages/signin/";
 import CreateTicket from "./pages/createticket/";
@@ -10,27 +10,20 @@ import Loader from "./components/Loader";
 
 export default function AppRoute() {
   const { state } = useContext(TicketContext);
-  let history = useHistory();
-
-  if (!state.isLoggedIn) {
-    history.push("/");
-  }
-  if (state.isLoggedIn && state.isAdmin) {
-    history.push("/list");
-  }
 
   return (
     <>
       <Switch>
-        {!state.isLoggedIn ? (
-          <Route exact path="/" component={SignIn} />
-        ) : (
+        {!state.isLoggedIn && <Route path="/" component={SignIn} />}
+        {state.isLoggedIn && state.role === "user" && (
           <>
-            <Route exact path="/create" component={CreateTicket} />
-            <Route exact path="/list" component={ListTickets} />{" "}
+            <Route exact path={["/", "/create"]} component={CreateTicket} />
+            <Route path="/list" component={ListTickets} />
           </>
         )}
-        {!state.isLoggedIn && <Redirect to="/" />}
+        {state.isLoggedIn && state.role === "Admin" && (
+          <Route exact path={["/", "/list"]} component={ListTickets} />
+        )}
       </Switch>
       {state.isLoading && <Loader />}
     </>
