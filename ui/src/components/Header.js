@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import TicketContext from "../TicketContext";
 import { appRoutes } from "../AppConfig";
 
@@ -12,11 +12,16 @@ const Header = () => {
           Ticket Dashboard
         </div>
         {state.isLoggedIn && (
-          <div className="lg:w-1/4 xl:w-1/5 pl-6 pr-6 lg:pr-8">
+          <div className="lg:w-1/4 xl:w-1/7 pl-6 pr-6 lg:pr-8">
             {appRoutes[state.role].map((route, i) => (
-              <Link to={`/${route.route}`} key={route.route}>
+              <NavLink
+                to={`/${route.route}`}
+                key={route.route}
+                className="ml-10  border-blue-500"
+                activeClassName="text-blue-500 border-b-2"
+              >
                 {route.title}
-              </Link>
+              </NavLink>
             ))}
           </div>
         )}

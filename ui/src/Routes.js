@@ -21,7 +21,7 @@ export default function AppRoute() {
             <Route path="/list" component={ListTickets} />
           </>
         )}
-        {state.isLoggedIn && state.role === "Admin" && (
+        {state.isLoggedIn && state.role === "admin" && (
           <Route exact path={["/", "/list"]} component={ListTickets} />
         )}
       </Switch>

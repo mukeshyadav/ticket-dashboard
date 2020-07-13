@@ -8,6 +8,14 @@
   background-color: #68d391;
 }
 
+.ico-down {
+  background: transparent url("./ico-down.svg") 0 0 no-repeat;
+  height: 28px;
+  width: 28px;
+  background-size: 28px;
+  display: inline-block;
+}
+
 .loader {
   border-top-color: #3498db;
   -webkit-animation: spinner 1.5s linear infinite;

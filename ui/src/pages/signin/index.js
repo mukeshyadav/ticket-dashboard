@@ -19,7 +19,7 @@ export default function SignInForm() {
     const result = await post("/signin", data);
     if (response.ok) {
       dispatch({ type: "APP_SIGNIN", payload: result });
-      if (result.role === "Admin") {
+      if (result.role === "admin") {
         history.push("/list");
       }
       if (result.role === "user") {

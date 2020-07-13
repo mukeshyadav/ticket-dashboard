@@ -30,7 +30,11 @@ export default function ListTickets() {
     <>
       <h2 className="text-xl font-semibold pb-2 pt-2">Tickets</h2>
       {error && <Error message={ERROR_MESSAGE.FAILED} />}
-      {!error && <TableList lists={state.tickets} isAdmin={state.isAdmin} />}
+      {!error && state.tickets.length ? (
+        <TableList lists={state.tickets} isAdmin={state.isAdmin} />
+      ) : (
+        <Error message={ERROR_MESSAGE.NOTICKET} />
+      )}
     </>
   );
 }

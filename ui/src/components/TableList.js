@@ -2,14 +2,40 @@ import React from "react";
 
 export default function TableList({ lists, isAdmin }) {
   return (
-    <table className="table-auto">
+    <table className="table-auto w-full">
       <thead>
         <tr>
-          <th className="px-4 py-2">ID</th>
+          <th className="px-4 py-2">
+            <span className="flex">
+              ID <i className="ico-down"></i>
+            </span>
+          </th>
           <th className="px-4 py-2">Summary</th>
           <th className="px-4 py-2">Description</th>
-          <th className="px-4 py-2">Type</th>
-          <th className="px-4 py-2">Complexity</th>
+          <th className="px-4 py-2">
+            Type{" "}
+            <div className="relative">
+              <select
+                className={`block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500`}
+                id="type"
+                name="type"
+              >
+                <option>Filter By:</option>
+                <option value="enhancement">Enhancement</option>
+                <option value="bugfix">Bugfix</option>
+                <option value="development">Development</option>
+                <option value="qa">QA</option>
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <i className="ico-down"></i>
+              </div>
+            </div>
+          </th>
+          <th className="px-4 py-2">
+            <span className="flex">
+              Complexity <i className="ico-down"></i>
+            </span>
+          </th>
           <th className="px-4 py-2">Estimated time for completion</th>
           <th className="px-4 py-2">Cost</th>
         </tr>
@@ -37,8 +63,9 @@ export default function TableList({ lists, isAdmin }) {
             <tr
               className={`${i % 2 === 0 && "bg-gray-200"} ${isAdmin &&
                 statusColor}`}
+              key={id}
             >
-              <td className="border px-4 py-2">{id}</td>
+              <td className="border px-4 py-2">{id} </td>
               <td className="border px-4 py-2">{summary}</td>
               <td className="border px-4 py-2">{description}</td>
               <td className="border px-4 py-2">{type}</td>
