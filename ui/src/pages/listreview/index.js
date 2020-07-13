@@ -28,6 +28,10 @@ export default function ListReview() {
     }
   };
 
+  const reviewStatus = status => {
+    console.log(status);
+  };
+
   const {
     summary,
     description,
@@ -62,10 +66,16 @@ export default function ListReview() {
         </div>
       </div>
       <div className="px-6 py-4">
-        <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        <button
+          className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          onClick={e => reviewStatus("accept")}
+        >
           Accept
         </button>
-        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2"
+          onClick={e => reviewStatus("reject")}
+        >
           Reject
         </button>
       </div>

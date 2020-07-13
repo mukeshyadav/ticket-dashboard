@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 export default function TableList({
   lists,
@@ -7,10 +8,16 @@ export default function TableList({
   onFilterTicketBy
 }) {
   const [selectedDropDownValue, setSelectedDropwDownValue] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     onFilterTicketBy("type", selectedDropDownValue);
   }, [selectedDropDownValue]);
+
+  const moveToReview = id => {
+    if (!isAdmin) return;
+    history.push(`/review/${id}`);
+  };
 
   return (
     <table className="table-auto w-full">
@@ -80,8 +87,9 @@ export default function TableList({
           return (
             <tr
               className={`${i % 2 === 0 && "bg-gray-200"} ${isAdmin &&
-                statusColor}`}
+                statusColor} ${isAdmin && "cursor-pointer"}`}
               key={id}
+              onClick={e => moveToReview(id)}
             >
               <td className="border px-4 py-2">{id} </td>
               <td className="border px-4 py-2">{summary}</td>

@@ -42,6 +42,8 @@ export default function ticketReducer(state, action) {
         })
       );
       return { ...state, filtered: action.payload };
+    case "REVIEW_STATUS":
+      return { ...state };
     case "SHOW_LOADER":
       return { ...state, isLoading: action.payload };
     case "HIDE_LOADER":
