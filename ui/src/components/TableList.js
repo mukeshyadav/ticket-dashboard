@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export default function TableList({ lists, isAdmin }) {
+export default function TableList({
+  lists,
+  isAdmin,
+  onSortTicketBy,
+  onFilterTicketBy
+}) {
+  const [selectedDropDownValue, setSelectedDropwDownValue] = useState();
+
+  useEffect(() => {
+    onFilterTicketBy("type", selectedDropDownValue);
+  }, [selectedDropDownValue]);
+
   return (
     <table className="table-auto w-full">
       <thead>
         <tr>
           <th className="px-4 py-2">
-            <span className="flex">
+            <span
+              className="flex cursor-pointer"
+              onClick={() => onSortTicketBy("id")}
+            >
               ID <i className="ico-down"></i>
             </span>
           </th>
@@ -19,6 +33,7 @@ export default function TableList({ lists, isAdmin }) {
                 className={`block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500`}
                 id="type"
                 name="type"
+                onChange={e => setSelectedDropwDownValue(e.currentTarget.value)}
               >
                 <option>Filter By:</option>
                 <option value="enhancement">Enhancement</option>
@@ -32,7 +47,10 @@ export default function TableList({ lists, isAdmin }) {
             </div>
           </th>
           <th className="px-4 py-2">
-            <span className="flex">
+            <span
+              className="flex cursor-pointer"
+              onClick={() => onSortTicketBy("complexity")}
+            >
               Complexity <i className="ico-down"></i>
             </span>
           </th>

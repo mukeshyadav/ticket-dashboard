@@ -28,10 +28,20 @@ export default function ticketReducer(state, action) {
         LOCALSTORAGE_NAME,
         JSON.stringify({
           ...state,
-          tickets: action.payload
+          tickets: action.payload,
+          filtered: action.payload
         })
       );
-      return { ...state, tickets: action.payload };
+      return { ...state, tickets: action.payload, filtered: action.payload };
+    case "FILTER_TICKETS":
+      localStorage.setItem(
+        LOCALSTORAGE_NAME,
+        JSON.stringify({
+          ...state,
+          filtered: action.payload
+        })
+      );
+      return { ...state, filtered: action.payload };
     case "SHOW_LOADER":
       return { ...state, isLoading: action.payload };
     case "HIDE_LOADER":
