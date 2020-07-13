@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import SignIn from "./pages/signin/";
 import CreateTicket from "./pages/createticket/";
 import ListTickets from "./pages/listtitcket";
+import ListReview from "./pages/listreview";
 
 import Loader from "./components/Loader";
 
@@ -22,7 +23,10 @@ export default function AppRoute() {
           </>
         )}
         {state.isLoggedIn && state.role === "admin" && (
-          <Route exact path={["/", "/list"]} component={ListTickets} />
+          <>
+            <Route exact path={["/", "/list"]} component={ListTickets} />
+            <Route exact path="/review/:id?" component={ListReview} />
+          </>
         )}
       </Switch>
       {state.isLoading && <Loader />}
